@@ -8,6 +8,6 @@
     <dimen name="button_round_size">999dp</dimen>
 
     <!-- 通用对话框圆角大小 -->
-    <dimen name="dialog_common_radius_size">8dp</dimen>
+    <dimen name="dialog_common_radius_size">12dp</dimen>
 
 </resources>

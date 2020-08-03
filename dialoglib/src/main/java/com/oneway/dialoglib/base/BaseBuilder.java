@@ -11,7 +11,6 @@ import android.view.View;
 
 import androidx.annotation.LayoutRes;
 
-import com.oneway.dialoglib.config.AnimConst;
 import com.oneway.dialoglib.util.ScreenUtil;
 
 public abstract class BaseBuilder<T extends BaseBuilder, D extends IDialog> {
@@ -26,7 +25,7 @@ public abstract class BaseBuilder<T extends BaseBuilder, D extends IDialog> {
     public boolean cancelable = true;
     public View dialogView;
     public Context mContext;
-    public int animRes = AnimConst.ANIM_IOS;//Dialog动画style
+    public int animRes = -1;//Dialog动画style
     public IDialog.OnBuildListener buildListener;
     public IDialog.OnDismissListener dismissListener;
     public boolean mAutoDismiss = true;

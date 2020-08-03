@@ -16,7 +16,7 @@ public class InputDialog extends BaseCommonDialog<InputDialog.Builder> {
 
     @Override
     public int getExtraViewRes() {
-        return R.layout.input_dialog;
+        return R.layout.lib_input_dialog;
     }
 
     @Override

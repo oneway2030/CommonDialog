@@ -13,7 +13,7 @@ import androidx.annotation.LayoutRes;
 
 import com.oneway.dialoglib.util.ScreenUtil;
 
-public abstract class BaseBuilder<T extends BaseBuilder, D extends IDialog> {
+public abstract class BaseBuilder<T extends BaseBuilder> {
     public static final String FTag = "dialogTag";
     public FragmentManager fragmentManager;
     public int layoutRes;
@@ -28,8 +28,7 @@ public abstract class BaseBuilder<T extends BaseBuilder, D extends IDialog> {
     public int animRes = -1;//Dialog动画style
     public IDialog.OnBuildListener buildListener;
     public IDialog.OnDismissListener dismissListener;
-    public boolean mAutoDismiss = true;
-    private D dialog;
+    private IDialog dialog;
 
     public BaseBuilder(Context context) {
         if (context == null) {
@@ -40,15 +39,6 @@ public abstract class BaseBuilder<T extends BaseBuilder, D extends IDialog> {
         }
         mContext = context;
         fragmentManager = ((Activity) context).getFragmentManager();
-    }
-
-    /**
-     * 自动关闭弹出
-     */
-    public void onAutoDismiss() {
-        if (mAutoDismiss) {
-            dialog.dismiss();
-        }
     }
 
     /**
@@ -195,17 +185,6 @@ public abstract class BaseBuilder<T extends BaseBuilder, D extends IDialog> {
     }
 
     /**
-     * 点击按钮后自动关闭
-     *
-     * @param dismiss
-     * @return
-     */
-    public T setAutoDismiss(boolean dismiss) {
-        mAutoDismiss = dismiss;
-        return (T) this;
-    }
-
-    /**
      * 移除之前的dialog
      */
     protected void removePreDialog() {
@@ -223,7 +202,7 @@ public abstract class BaseBuilder<T extends BaseBuilder, D extends IDialog> {
      *
      * @return SYDialog
      */
-    public D show() {
+    public IDialog show() {
         if (this.layoutRes <= 0 && this.dialogView == null) {
             //如果没有设置布局 提供默认设置
 //            setDefaultOption();
@@ -252,7 +231,7 @@ public abstract class BaseBuilder<T extends BaseBuilder, D extends IDialog> {
      *
      * @return
      */
-    protected abstract D create();
+    protected abstract IDialog create();
 
 
 }

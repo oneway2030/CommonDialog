@@ -60,16 +60,17 @@ public class BaseCommonDialog<T extends BaseCommonDialog.BaseCommonBuilder> exte
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.tv_ui_cancel) {
-            builder.onAutoDismiss();
             if (builder.negativeBtnListener != null) {
                 builder.negativeBtnListener.onClick(this);
+            } else {
+                dismiss();
             }
         } else if (id == R.id.tv_ui_confirm) {
-            builder.onAutoDismiss();
             if (builder.positiveBtnListener != null) {
                 builder.positiveBtnListener.onClick(this);
+            } else {
+                dismiss();
             }
-
         }
     }
 
@@ -79,7 +80,7 @@ public class BaseCommonDialog<T extends BaseCommonDialog.BaseCommonBuilder> exte
     /**
      * 当前dialog的builder
      */
-    public static class Builder extends BaseCommonBuilder<Builder, BaseCommonDialog> {
+    public static class Builder extends BaseCommonBuilder<Builder> {
 
         public Builder(Context context) {
             super(context);
@@ -95,9 +96,8 @@ public class BaseCommonDialog<T extends BaseCommonDialog.BaseCommonBuilder> exte
      * 通用dialog的builder
      *
      * @param <T>
-     * @param <D>
      */
-    public abstract static class BaseCommonBuilder<T extends BaseBuilder, D extends MyBaseDialogFragment> extends BaseBuilder<T, D> {
+    public abstract static class BaseCommonBuilder<T extends BaseBuilder> extends BaseBuilder<T> {
         public IDialog.OnClickListener positiveBtnListener;
         public IDialog.OnClickListener negativeBtnListener;
         public String titleStr;//默认标题
@@ -109,7 +109,16 @@ public class BaseCommonDialog<T extends BaseCommonDialog.BaseCommonBuilder> exte
             super(context);
         }
 
-
+        /**
+         * 设置右边按钮文字
+         *
+         * @param btnStr
+         * @return
+         */
+        public T setPositiveButton(String btnStr) {
+            this.positiveStr = btnStr;
+            return (T) this;
+        }
         /**
          * 设置默认右侧点击按钮
          *
@@ -133,7 +142,17 @@ public class BaseCommonDialog<T extends BaseCommonDialog.BaseCommonBuilder> exte
         }
 
         /**
-         * 设置左侧按钮
+         * 设置左边按钮文字
+         *
+         * @param btnStr
+         * @return
+         */
+        public T setNegativeButton(String btnStr) {
+            this.negativeStr = btnStr;
+            return (T) this;
+        }
+        /**
+         * 设置左侧按钮点击该监听
          *
          * @param onclickListener IDialog.OnClickListener
          * @return T
@@ -142,13 +161,8 @@ public class BaseCommonDialog<T extends BaseCommonDialog.BaseCommonBuilder> exte
             return (T) setNegativeButton(ResourcesUtils.getString(mContext, R.string.common_cancel), onclickListener);
         }
 
-        public T setNegativeButton(String btnStr) {
-            this.negativeStr = btnStr;
-            return (T) this;
-        }
-
         /**
-         * 设置左侧文字及按钮
+         * 设置左侧文字及按钮监听
          *
          * @param btnStr          文字
          * @param onclickListener IDialog.OnClickListener

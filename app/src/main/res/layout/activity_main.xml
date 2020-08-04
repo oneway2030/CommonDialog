@@ -12,7 +12,7 @@
         android:layout_height="40dp"
         android:clickable="true"
         android:gravity="center"
-        android:onClick="showMyDialog"
+        android:onClick="showCommonDialog"
         android:text="基础标题dialog" />
 
     <Button
@@ -40,6 +40,6 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center"
-        android:onClick="BottomSheetDialogCustomTitle"
-        android:text="BottomSheetDialog自定义标题" />
+        android:onClick="BottomSheetDialogCustom"
+        android:text="BottomSheetDialog自定义" />
 </LinearLayout>

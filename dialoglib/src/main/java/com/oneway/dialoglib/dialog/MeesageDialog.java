@@ -24,7 +24,7 @@ public class MeesageDialog extends BaseCommonDialog<Builder> {
         mMessageView.setText(builder.contentStr);
     }
 
-    public static class Builder extends BaseCommonDialog.BaseCommonBuilder<Builder, MeesageDialog> {
+    public static class Builder extends BaseCommonDialog.BaseCommonBuilder<Builder> {
         public String contentStr;//默认内容
 
         public Builder(Context context) {

@@ -99,14 +99,16 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.tv_ui_cancel) {
-            builder.onAutoDismiss();
             if (builder.negativeBtnListener != null) {
                 builder.negativeBtnListener.onClick(this);
+            } else {
+                dismiss();
             }
         } else if (id == R.id.tv_ui_confirm) {
-            builder.onAutoDismiss();
             if (builder.positiveBtnListener != null) {
                 builder.positiveBtnListener.onClick(this);
+            } else {
+                dismiss();
             }
 
         }
@@ -115,15 +117,13 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
     /**
      * *******************************************************************************************
      */
-    public static class Builder<T> extends BaseBuilder<BottomSheetDialog.Builder, BottomSheetDialog> {
+    public static class Builder extends BaseBuilder<BottomSheetDialog.Builder> {
         public IDialog.OnClickListener positiveBtnListener;
         public IDialog.OnClickListener negativeBtnListener;
         public String titleStr;//默认标题
         public String positiveStr = ResourcesUtils.getString(mContext, R.string.common_confirm);//右边按钮文字
         public String negativeStr = ResourcesUtils.getString(mContext, R.string.common_cancel);//左边按钮文字
         private DialogTextFormatter dialogTextFormatter = new SimpleDialogTextFormatter();
-        private List<T> data;
-        private OnItemClickListener<T> onItemClickListener;
         private TitleViewCallback mTitleViewCallback;
         public int itemTextGravity = Gravity.CENTER;
         public int customTitleView;
@@ -132,6 +132,8 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
         private int itemIconRes = -1;
         public int adapterlayoutResId;
         private OnConvertItemListener mOnConvertItemListener;
+        private List data;
+        private OnItemClickListener onItemClickListener;
 
         public Builder(Context context) {
             super(context);
@@ -144,6 +146,16 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
             return new BottomSheetDialog();
         }
 
+        /**
+         * 设置右边按钮文字
+         *
+         * @param btnStr
+         * @return
+         */
+        public Builder setPositiveButton(String btnStr) {
+            this.positiveStr = btnStr;
+            return this;
+        }
         /**
          * 设置默认右侧点击按钮
          *
@@ -167,6 +179,16 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
         }
 
         /**
+         * 设置左边按钮文字
+         *
+         * @param btnStr
+         * @return
+         */
+        public Builder setNegativeButton(String btnStr) {
+            this.negativeStr = btnStr;
+            return this;
+        }
+        /**
          * 设置左侧按钮
          *
          * @param onclickListener IDialog.OnClickListener
@@ -176,10 +198,6 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
             return setNegativeButton(ResourcesUtils.getString(mContext, R.string.common_cancel), onclickListener);
         }
 
-        public Builder setNegativeButton(String btnStr) {
-            this.negativeStr = btnStr;
-            return this;
-        }
 
         /**
          * 设置左侧文字及按钮
@@ -205,7 +223,7 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
             return this;
         }
 
-        public Builder<T> setList(@NonNull List<T> list) {
+        public <T> Builder setList(@NonNull List<T> list) {
             this.data = list;
             return this;
         }
@@ -217,7 +235,7 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
          * @param onItemClickListener
          * @return
          */
-        public Builder<T> setOnItemClick(OnItemClickListener<T> onItemClickListener) {
+        public <T> Builder setOnItemClick(OnItemClickListener<T> onItemClickListener) {
             this.onItemClickListener = onItemClickListener;
             return this;
         }
@@ -226,7 +244,7 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
         /**
          * 自定义标题
          */
-        public Builder<T> setCustomTitleView(int customTitleView) {
+        public Builder setCustomTitleView(int customTitleView) {
             this.customTitleView = customTitleView;
             return this;
         }
@@ -237,7 +255,7 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
          * @param titleViewCallback
          * @return
          */
-        public Builder<T> setTitleViewCallback(TitleViewCallback titleViewCallback) {
+        public Builder setTitleViewCallback(TitleViewCallback titleViewCallback) {
             this.mTitleViewCallback = titleViewCallback;
             return this;
         }
@@ -245,7 +263,7 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
         /**
          * 设置条目 格式化文字
          */
-        public Builder<T> setItemTextFormatter(DialogTextFormatter<T> spinnerTextFormatter) {
+        public <T> Builder setItemTextFormatter(DialogTextFormatter<T> spinnerTextFormatter) {
             this.dialogTextFormatter = spinnerTextFormatter;
             return this;
         }
@@ -255,7 +273,7 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
          *
          * @param gravity Gravity
          */
-        public Builder<T> setItemGravity(int gravity) {
+        public Builder setItemGravity(int gravity) {
             this.itemTextGravity = gravity;
             return this;
         }
@@ -263,7 +281,7 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
         /**
          * 设置条目 默认选中位置
          */
-        public Builder<T> setItemSelectPosition(int defSelectPosition) {
+        public Builder setItemSelectPosition(int defSelectPosition) {
             this.defSelectPosition = defSelectPosition;
             return this;
         }
@@ -271,7 +289,7 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
         /**
          * 设置条目 文本颜色
          */
-        public Builder<T> itemTextColor(@ColorRes int itemTextColor) {
+        public Builder itemTextColor(@ColorRes int itemTextColor) {
             this.itemTextColor = itemTextColor;
             return this;
         }
@@ -279,7 +297,7 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
         /**
          * 设置条目 自定义选中图标
          */
-        public Builder<T> setItemSelectIcon(int itemIconRes) {
+        public Builder setItemSelectIcon(int itemIconRes) {
             this.itemIconRes = itemIconRes;
             return this;
         }
@@ -290,7 +308,7 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
          * @param adapterlayoutResId
          * @return
          */
-        public Builder<T> customAdapterlayoutResId(int adapterlayoutResId) {
+        public Builder customAdapterlayoutResId(int adapterlayoutResId) {
             this.adapterlayoutResId = adapterlayoutResId;
             return this;
         }
@@ -301,7 +319,7 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
          * @param mOnConvertItemListener
          * @return
          */
-        public Builder<T> setOnConvertItemListener(OnConvertItemListener mOnConvertItemListener) {
+        public <T> Builder setConvertItemListener(OnConvertItemListener<T> mOnConvertItemListener) {
             this.mOnConvertItemListener = mOnConvertItemListener;
             return this;
         }

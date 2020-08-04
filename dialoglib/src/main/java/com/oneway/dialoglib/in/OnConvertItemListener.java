@@ -1,5 +1,6 @@
 package com.oneway.dialoglib.in;
 
+
 import com.chad.library.adapter.base.BaseViewHolder;
 
 public interface OnConvertItemListener<T> {

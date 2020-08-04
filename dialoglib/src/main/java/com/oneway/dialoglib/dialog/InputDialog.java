@@ -37,7 +37,7 @@ public class InputDialog extends BaseCommonDialog<InputDialog.Builder> {
         }, 300);
     }
 
-    public static class Builder extends BaseCommonDialog.BaseCommonBuilder<Builder, InputDialog> {
+    public static class Builder extends BaseCommonDialog.BaseCommonBuilder<Builder> {
         public String contentStr;//默认内容
 
         public Builder(Context context) {

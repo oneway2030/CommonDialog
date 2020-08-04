@@ -34,7 +34,7 @@ public class InputDialog extends BaseCommonDialog<InputDialog.Builder> {
             public void run() {
                 ContextCompat.getSystemService(getContext(), InputMethodManager.class).showSoftInput(mInputView, 0);
             }
-        }, 300);
+        }, 200);
     }
 
     public static class Builder extends BaseCommonDialog.BaseCommonBuilder<Builder> {

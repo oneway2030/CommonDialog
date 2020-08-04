@@ -209,7 +209,7 @@ public abstract class BaseBuilder<T extends BaseBuilder> {
         }
         //创建dialog
         dialog = create();
-        dialog.setBuilder(this);
+        dialog.setmBuilder(this);
         //判空
         if (this.mContext == null) return dialog;
         if (this.mContext instanceof Activity) {

@@ -32,7 +32,7 @@ public class BaseCommonDialog<T extends BaseCommonDialog.BaseCommonBuilder> exte
     @Override
     protected void initView(View rooView) {
         SmartTextView tv = rooView.findViewById(R.id.tv_ui_title);
-        tv.setText(builder.titleStr);
+        tv.setText(mBuilder.titleStr);
         mContainerLayout = rooView.findViewById(R.id.ll_ui_container);
         if (getExtraViewRes() > 0) {
             View inflate = LayoutInflater.from(mContext).inflate(getExtraViewRes(), mContainerLayout, false);
@@ -40,9 +40,9 @@ public class BaseCommonDialog<T extends BaseCommonDialog.BaseCommonBuilder> exte
         }
         //如果 negativeStr为null或空字符,btnCancel将不显示
         btnCancel = rooView.findViewById(R.id.tv_ui_cancel);
-        btnCancel.setText(builder.negativeStr);
+        btnCancel.setText(mBuilder.negativeStr);
         btnConfirm = rooView.findViewById(R.id.tv_ui_confirm);
-        btnConfirm.setText(builder.positiveStr);
+        btnConfirm.setText(mBuilder.positiveStr);
         setOnClickListener(R.id.tv_ui_cancel, R.id.tv_ui_confirm);
 
     }
@@ -60,14 +60,14 @@ public class BaseCommonDialog<T extends BaseCommonDialog.BaseCommonBuilder> exte
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.tv_ui_cancel) {
-            if (builder.negativeBtnListener != null) {
-                builder.negativeBtnListener.onClick(this);
+            if (mBuilder.negativeBtnListener != null) {
+                mBuilder.negativeBtnListener.onClick(this);
             } else {
                 dismiss();
             }
         } else if (id == R.id.tv_ui_confirm) {
-            if (builder.positiveBtnListener != null) {
-                builder.positiveBtnListener.onClick(this);
+            if (mBuilder.positiveBtnListener != null) {
+                mBuilder.positiveBtnListener.onClick(this);
             } else {
                 dismiss();
             }

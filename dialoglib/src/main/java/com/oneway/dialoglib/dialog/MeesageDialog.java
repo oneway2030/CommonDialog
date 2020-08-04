@@ -21,7 +21,7 @@ public class MeesageDialog extends BaseCommonDialog<Builder> {
     protected void initView(View rooView) {
         super.initView(rooView);
         mMessageView = rooView.findViewById(R.id.tv_message_message);
-        mMessageView.setText(builder.contentStr);
+        mMessageView.setText(mBuilder.contentStr);
     }
 
     public static class Builder extends BaseCommonDialog.BaseCommonBuilder<Builder> {

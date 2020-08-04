@@ -42,11 +42,11 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
     @Override
     protected void initView(View rooView) {
         LinearLayout llTitleLayout = rooView.findViewById(R.id.ll_title_layout);
-        if (builder.customTitleView > 0) {//自定义标题
-            View titleView = LayoutInflater.from(mContext).inflate(builder.customTitleView, llTitleLayout, false);
+        if (mBuilder.customTitleView > 0) {//自定义标题
+            View titleView = LayoutInflater.from(mContext).inflate(mBuilder.customTitleView, llTitleLayout, false);
             llTitleLayout.addView(titleView);
-            if (builder.mTitleViewCallback != null) {
-                builder.mTitleViewCallback.onCallback(this, titleView);
+            if (mBuilder.mTitleViewCallback != null) {
+                mBuilder.mTitleViewCallback.onCallback(this, titleView);
             }
         } else {
             View titleView = LayoutInflater.from(mContext).inflate(R.layout.lib_title_layout, llTitleLayout, false);
@@ -54,44 +54,44 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
             AppCompatTextView tvTitle = rooView.findViewById(R.id.tv_ui_title);
             btnCancel = rooView.findViewById(R.id.tv_ui_cancel);
             btnConfirm = rooView.findViewById(R.id.tv_ui_confirm);
-            tvTitle.setText(builder.titleStr);
-            btnCancel.setText(builder.negativeStr);
-            btnConfirm.setText(builder.positiveStr);
+            tvTitle.setText(mBuilder.titleStr);
+            btnCancel.setText(mBuilder.negativeStr);
+            btnConfirm.setText(mBuilder.positiveStr);
             setOnClickListener(R.id.tv_ui_cancel, R.id.tv_ui_confirm);
         }
         mRecy = rooView.findViewById(R.id.recy);
         //
         mRecy.setLayoutManager(new LinearLayoutManager(mContext));
-        if (builder.adapterlayoutResId > 0) {
-            mAdapter = new BottomSheetAdapter(builder.adapterlayoutResId, builder.mOnConvertItemListener);
+        if (mBuilder.adapterlayoutResId > 0) {
+            mAdapter = new BottomSheetAdapter(mBuilder.adapterlayoutResId, mBuilder.mOnConvertItemListener);
         } else {
             mAdapter = new BottomSheetAdapter();
         }
         //设置文本位置
-        mAdapter.setTextGravity(builder.itemTextGravity);
+        mAdapter.setTextGravity(mBuilder.itemTextGravity);
         //设置文本格式化
-        if (builder.dialogTextFormatter != null) {
-            mAdapter.setTextFormatter(builder.dialogTextFormatter);
+        if (mBuilder.dialogTextFormatter != null) {
+            mAdapter.setTextFormatter(mBuilder.dialogTextFormatter);
         }
-        if (builder.defSelectPosition >= 0) {//默认位置
-            mAdapter.setSelectPosition(builder.defSelectPosition);
+        if (mBuilder.defSelectPosition >= 0) {//默认位置
+            mAdapter.setSelectPosition(mBuilder.defSelectPosition);
         }
-        if (builder.itemTextColor >= 0) {//文本颜色
-            mAdapter.setItemTextColor(builder.itemTextColor);
+        if (mBuilder.itemTextColor >= 0) {//文本颜色
+            mAdapter.setItemTextColor(mBuilder.itemTextColor);
         }
-        if (builder.itemIconRes >= 0) {//默认选中图标
-            mAdapter.setItemSelectIcon(builder.itemIconRes);
+        if (mBuilder.itemIconRes >= 0) {//默认选中图标
+            mAdapter.setItemSelectIcon(mBuilder.itemIconRes);
         }
         mRecy.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
-        mAdapter.setNewData(builder.data);
+        mAdapter.setNewData(mBuilder.data);
 
     }
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        if (builder.onItemClickListener != null) {
-            builder.onItemClickListener.onItemClick(this, adapter.getData().get(position), position);
+        if (mBuilder.onItemClickListener != null) {
+            mBuilder.onItemClickListener.onItemClick(this, adapter.getData().get(position), position);
         }
     }
 
@@ -99,14 +99,14 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.tv_ui_cancel) {
-            if (builder.negativeBtnListener != null) {
-                builder.negativeBtnListener.onClick(this);
+            if (mBuilder.negativeBtnListener != null) {
+                mBuilder.negativeBtnListener.onClick(this);
             } else {
                 dismiss();
             }
         } else if (id == R.id.tv_ui_confirm) {
-            if (builder.positiveBtnListener != null) {
-                builder.positiveBtnListener.onClick(this);
+            if (mBuilder.positiveBtnListener != null) {
+                mBuilder.positiveBtnListener.onClick(this);
             } else {
                 dismiss();
             }
@@ -123,17 +123,17 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
         public String titleStr;//默认标题
         public String positiveStr = ResourcesUtils.getString(mContext, R.string.common_confirm);//右边按钮文字
         public String negativeStr = ResourcesUtils.getString(mContext, R.string.common_cancel);//左边按钮文字
-        private DialogTextFormatter dialogTextFormatter = new SimpleDialogTextFormatter();
-        private TitleViewCallback mTitleViewCallback;
-        public int itemTextGravity = Gravity.CENTER;
-        public int customTitleView;
-        private int defSelectPosition = -99;
-        private int itemTextColor = -1;
-        private int itemIconRes = -1;
-        public int adapterlayoutResId;
-        private OnConvertItemListener mOnConvertItemListener;
-        private List data;
-        private OnItemClickListener onItemClickListener;
+        private DialogTextFormatter dialogTextFormatter = new SimpleDialogTextFormatter();//文本转换
+        public int customTitleView; // 是自定义标题view
+        private TitleViewCallback mTitleViewCallback;// 是自定义标题 设置回调
+        private int defSelectPosition = -99;//默认位置
+        private int itemTextColor = -1;//设置item 文本颜色
+        private int itemIconRes = -1;//设置item icon
+        public int itemTextGravity = Gravity.CENTER;//设置item 文本位置
+        private List data;//列表数据
+        public int adapterlayoutResId;//自定义adapter 布局id
+        private OnConvertItemListener mOnConvertItemListener;//自定义adapter 布局设置监听
+        private OnItemClickListener onItemClickListener;//item点击监听
 
         public Builder(Context context) {
             super(context);

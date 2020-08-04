@@ -18,7 +18,7 @@ public interface IDialog<T extends BaseBuilder> {
 
     Context getContext();
 
-    void setBuilder(T builder);
+    void setmBuilder(T mBuilder);
 
     default void showAllowingLoss(FragmentManager manager, String tag) {
     }

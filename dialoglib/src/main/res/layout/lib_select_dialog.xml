@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.oneway.dialoglib.widget.MaxHeightView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/lib_shape_bottom_dialog_bg"
+    android:orientation="vertical"
+    app:maxHeightRatio="0.6">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_select_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".dialog.SelectDialog"
+        tools:itemCount="5"
+        tools:listitem="@layout/lib_item_select" />
+
+</com.oneway.dialoglib.widget.MaxHeightView>

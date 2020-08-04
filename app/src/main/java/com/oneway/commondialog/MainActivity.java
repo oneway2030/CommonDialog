@@ -13,12 +13,16 @@ import com.oneway.dialoglib.dialog.BaseCommonDialog;
 import com.oneway.dialoglib.dialog.BottomSheetDialog;
 import com.oneway.dialoglib.dialog.InputDialog;
 import com.oneway.dialoglib.dialog.MeesageDialog;
+import com.oneway.dialoglib.dialog.SelectDialog;
 import com.oneway.dialoglib.in.DialogTextFormatter;
 import com.oneway.dialoglib.in.OnConvertItemListener;
 import com.oneway.dialoglib.in.OnItemClickListener;
+import com.oneway.dialoglib.in.OnSelectedListener;
 import com.oneway.dialoglib.in.TitleViewCallback;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -123,6 +127,52 @@ public class MainActivity extends AppCompatActivity {
                         defPosition = position;
                         showToast("点击的是 =>" + data.getAge() + "岁");
                         dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+
+    public void SelectDialogSingle(View view) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("男");
+        list.add("女");
+        new SelectDialog.Builder(this)
+                .setTitle("请选择性别")
+                .setSelect(0)//设置默认选中
+                .setList(list)
+                .setOnSelectedListener(new OnSelectedListener<String>() {
+                    @Override
+                    public void onSelected(IDialog dialog, HashMap<Integer, String> data) {
+                        dialog.dismiss();
+                        Collection<String> values = data.values();
+                        for (String value : values) {
+                            showToast(value);
+                        }
+                    }
+                })
+                .show();
+    }
+
+    public void SelectDialogMore(View view) {
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            list.add("条目" + i);
+        }
+        new SelectDialog.Builder(this)
+                .setTitle("请选择条目")
+                .setSelect(0,3,6,13,43)//设置默认选中
+                .setSingle(false)//设置为多选
+                .setMaxSelect(5)//最大选择5个条目
+                .setList(list)
+                .setOnSelectedListener(new OnSelectedListener<String>() {
+                    @Override
+                    public void onSelected(IDialog dialog, HashMap<Integer, String> data) {
+                        dialog.dismiss();
+                        Collection<String> values = data.values();
+                        for (String value : values) {
+                            showToast(value);
+                        }
                     }
                 })
                 .show();

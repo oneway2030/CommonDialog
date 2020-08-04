@@ -34,10 +34,10 @@ import java.lang.reflect.Field;
 public abstract class MyBaseDialogFragment<T extends BaseBuilder> extends DialogFragment implements IDialog<T>, View.OnClickListener {
     private View mRooView = null;
     protected Context mContext;
-    protected T builder;
+    protected T mBuilder;
 
-    public void setBuilder(T builder) {
-        this.builder = builder;
+    public void setmBuilder(T mBuilder) {
+        this.mBuilder = mBuilder;
     }
 
     /**
@@ -89,13 +89,13 @@ public abstract class MyBaseDialogFragment<T extends BaseBuilder> extends Dialog
             });
         }
         //设置默认Dialog的View布局
-        builder.dialogView = view;
+        mBuilder.dialogView = view;
         initView(view);
 //        dealDefaultDialog(mPositiveButtonListener, mNegativeButtonListener, titleStr,
 //                contentStr, showBtnLeft, negativeStr, showBtnRight, positiveStr);
         //回调给调用者，用来设置子View及点击事件等
-        if (builder.buildListener != null && mRooView != null) {
-            builder.buildListener.onBuildChildView(this, mRooView, getLayoutRes());
+        if (mBuilder.buildListener != null && mRooView != null) {
+            mBuilder.buildListener.onBuildChildView(this, mRooView, getLayoutRes());
         }
     }
 
@@ -131,24 +131,24 @@ public abstract class MyBaseDialogFragment<T extends BaseBuilder> extends Dialog
         }
         //设置屏幕透明度 0.0f~1.0f(完全透明~完全不透明)
         params.dimAmount = getDimAmount();
-        params.gravity = builder.gravity;
+        params.gravity = mBuilder.gravity;
         // 如果当前没有设置动画效果，就设置一个默认的动画效果
-        if (builder.animRes <= 0) {
-            switch (builder.gravity) {
+        if (mBuilder.animRes <= 0) {
+            switch (mBuilder.gravity) {
                 case Gravity.TOP:
-                    builder.animRes = AnimConst.ANIM_TOP;
+                    mBuilder.animRes = AnimConst.ANIM_TOP;
                     break;
                 case Gravity.BOTTOM:
-                    builder.animRes = AnimConst.ANIM_BOTTOM;
+                    mBuilder.animRes = AnimConst.ANIM_BOTTOM;
                     break;
                 case Gravity.LEFT:
-                    builder.animRes = AnimConst.ANIM_LEFT;
+                    mBuilder.animRes = AnimConst.ANIM_LEFT;
                     break;
                 case Gravity.RIGHT:
-                    builder.animRes = AnimConst.ANIM_RIGHT;
+                    mBuilder.animRes = AnimConst.ANIM_RIGHT;
                     break;
                 default:
-                    builder.animRes = AnimConst.ANIM_DEFAULT;
+                    mBuilder.animRes = AnimConst.ANIM_DEFAULT;
                     break;
             }
         }
@@ -160,40 +160,40 @@ public abstract class MyBaseDialogFragment<T extends BaseBuilder> extends Dialog
     }
 
     protected int getLayoutRes() {
-        return builder.layoutRes;
+        return mBuilder.layoutRes;
     }
 
     protected View getDialogView() {
-        return builder.dialogView;
+        return mBuilder.dialogView;
     }
 
     protected boolean isCancelableOutside() {
-        return builder.isCancelableOutside;
+        return mBuilder.isCancelableOutside;
     }
 
     @Override
     public boolean isCancelable() {
-        return builder.cancelable;
+        return mBuilder.cancelable;
     }
 
     protected int getDialogWidth() {
-        return builder.dialogWidth;
+        return mBuilder.dialogWidth;
     }
 
     protected int getDialogHeight() {
-        return builder.dialogHeight;
+        return mBuilder.dialogHeight;
     }
 
     public float getDimAmount() {
-        return builder.dimAmount;
+        return mBuilder.dimAmount;
     }
 
     protected int getGravity() {
-        return builder.gravity;
+        return mBuilder.gravity;
     }
 
     protected int getAnimRes() {
-        return builder.animRes;
+        return mBuilder.animRes;
     }
 
     @Override
@@ -214,8 +214,8 @@ public abstract class MyBaseDialogFragment<T extends BaseBuilder> extends Dialog
     @Override
     public void onDestroy() {
         //监听dialog的dismiss
-        if (builder.dismissListener != null) {
-            builder.dismissListener.onDismiss(this);
+        if (mBuilder.dismissListener != null) {
+            mBuilder.dismissListener.onDismiss(this);
         }
         super.onDestroy();
         MyDialogsManager.getInstance().over();

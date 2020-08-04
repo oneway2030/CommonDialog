@@ -140,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         new SelectDialog.Builder(this)
                 .setTitle("请选择性别")
                 .setSelect(0)//设置默认选中
+                .setCheckResIcon(R.mipmap.ic_launcher)//选中图标
                 .setList(list)
                 .setOnSelectedListener(new OnSelectedListener<String>() {
                     @Override

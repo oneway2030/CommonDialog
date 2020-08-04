@@ -74,9 +74,17 @@ public class SelectAdapter<T> extends BaseQuickAdapter<T, BaseViewHolder> {
 
     public int getIcon(int position) {
         if (mBuilder.mSelectList.contains(position)) {
-            return R.drawable.icon_checkbox_checked;
+            if (mBuilder.selectRes == 0) {
+                return R.drawable.icon_checkbox_checked;
+            } else {
+                return mBuilder.selectRes;
+            }
         } else {
-            return R.drawable.icon_checkbox_normal;
+            if (mBuilder.unSelectRes == 0) {
+                return R.drawable.icon_checkbox_normal;
+            } else {
+                return mBuilder.unSelectRes;
+            }
         }
     }
 

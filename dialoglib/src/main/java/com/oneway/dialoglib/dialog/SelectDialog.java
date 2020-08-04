@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -82,6 +83,8 @@ public class SelectDialog extends BaseCommonDialog<SelectDialog.Builder> impleme
         public int mMinSelect = 1;
         public int mMaxSelect = Integer.MAX_VALUE;//Integer.MAX_VALUE
         public OnSelectedListener mOnSelectedListener;//选中回调
+        public int selectRes;//选中图标
+        public int unSelectRes;//未选中图标
 
         public Builder(Context context) {
             super(context);
@@ -149,5 +152,22 @@ public class SelectDialog extends BaseCommonDialog<SelectDialog.Builder> impleme
             this.dialogTextFormatter = spinnerTextFormatter;
             return this;
         }
+
+        /**
+         * 设置最大选择数量
+         */
+        public Builder setCheckResIcon(@DrawableRes int selectRes) {
+            this.selectRes = selectRes;
+            return this;
+        }
+
+        /**
+         * 设置最大选择数量
+         */
+        public Builder setUnCheckResIcon(int unSelectRes) {
+            this.unSelectRes = unSelectRes;
+            return this;
+        }
+
     }
 }

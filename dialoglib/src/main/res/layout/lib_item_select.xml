@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingHorizontal="20dp"
+    android:gravity="center_vertical"
     android:background="@drawable/lib_transparent_selector"
     tools:context=".dialog.SelectDialog">
 

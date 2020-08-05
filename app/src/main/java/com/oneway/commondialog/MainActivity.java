@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.oneway.dialoglib.base.IDialog;
+import com.oneway.dialoglib.dialog.AddressDialog;
 import com.oneway.dialoglib.dialog.BaseCommonDialog;
 import com.oneway.dialoglib.dialog.BottomSheetDialog;
 import com.oneway.dialoglib.dialog.InputDialog;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 .setTitle("我是标题")
                 .show();
     }
+
 
     private int defPosition=0;
 
@@ -179,6 +181,14 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
+    /**
+     * 地址选择dialog
+     * @param view
+     */
+    public void AddressDialog(View view) {
+        new AddressDialog.Builder(this)
+                .show();
+    }
     private void showToast(String msg) {
         Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
     }

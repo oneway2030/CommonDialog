@@ -54,4 +54,10 @@
         android:gravity="center"
         android:onClick="SelectDialogMore"
         android:text="SelectDialog 多选" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:onClick="AddressDialog"
+        android:text="AddressDialog" />
 </LinearLayout>

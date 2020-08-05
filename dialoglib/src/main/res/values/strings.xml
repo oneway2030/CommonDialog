@@ -15,4 +15,7 @@
     <!-- 选择对话框 -->
     <string name="select_min_hint">至少要选择 %d 项</string>
     <string name="select_max_hint">最多只能选择 %d 项</string>
+    <!-- 地区对话框 -->
+    <string name="address_title">请选择地区</string>
+    <string name="address_hint">请选择</string>
 </resources>

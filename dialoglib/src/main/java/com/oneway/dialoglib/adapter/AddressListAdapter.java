@@ -1,7 +1,7 @@
 package com.oneway.dialoglib.adapter;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.oneway.dialoglib.R;
 import com.oneway.dialoglib.dialog.AddressDialog;
 

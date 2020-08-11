@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.oneway.dialoglib.R;
 import com.oneway.dialoglib.adapter.SelectAdapter;
 import com.oneway.dialoglib.base.IDialog;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class SelectDialog extends BaseCommonDialog<SelectDialog.Builder> implements BaseQuickAdapter.OnItemClickListener {
+public class SelectDialog extends BaseCommonDialog<SelectDialog.Builder> implements OnItemClickListener {
 
     private SelectAdapter mAdapter;
 

@@ -3,7 +3,7 @@ package com.oneway.dialoglib.adapter;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.oneway.dialoglib.R;
 import com.oneway.dialoglib.dialog.SelectDialog;
 import com.oneway.dialoglib.util.ResourcesUtils;
@@ -56,7 +56,7 @@ public class SelectAdapter<T> extends BaseQuickAdapter<T, BaseViewHolder> {
                     mBuilder.mSelectList.add(position);
                     notifyItemChanged(position);
                 } else {//超过最大选中数量
-                    Toast.makeText(mContext, String.format(ResourcesUtils.getString(mContext, R.string.select_max_hint), mBuilder.mMaxSelect), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), String.format(ResourcesUtils.getString(getContext(), R.string.select_max_hint), mBuilder.mMaxSelect), Toast.LENGTH_SHORT).show();
                 }
             }
         }

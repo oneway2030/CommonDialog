@@ -5,7 +5,7 @@ import androidx.annotation.LayoutRes;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.oneway.dialoglib.R;
 import com.oneway.dialoglib.in.DialogTextFormatter;
 import com.oneway.dialoglib.in.OnConvertItemListener;
@@ -56,7 +56,7 @@ public class BottomSheetAdapter<T> extends BaseQuickAdapter<T, BaseViewHolder> {
             tv.setGravity(itemTextGravity);
             helper.setGone(R.id.iv_icon, defSelectPosition == helper.getLayoutPosition());
             if (itemTextColor > 0) {
-                helper.setTextColor(R.id.tv_menu_text, ResourcesUtils.getColor(mContext, itemTextColor));
+                helper.setTextColor(R.id.tv_menu_text, ResourcesUtils.getColor(getContext(), itemTextColor));
             }
             if (itemIconRes > 0) {
                 helper.setImageResource(R.id.iv_icon, itemIconRes);

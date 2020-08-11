@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.oneway.dialoglib.R;
 import com.oneway.dialoglib.adapter.BottomSheetAdapter;
 import com.oneway.dialoglib.base.BaseBuilder;
@@ -20,14 +21,14 @@ import com.oneway.dialoglib.base.IDialog;
 import com.oneway.dialoglib.base.MyBaseDialogFragment;
 import com.oneway.dialoglib.in.DialogTextFormatter;
 import com.oneway.dialoglib.in.OnConvertItemListener;
-import com.oneway.dialoglib.in.OnItemClickListener;
+import com.oneway.dialoglib.in.OnDialogItemClickListener;
 import com.oneway.dialoglib.in.SimpleDialogTextFormatter;
 import com.oneway.dialoglib.in.TitleViewCallback;
 import com.oneway.dialoglib.util.ResourcesUtils;
 
 import java.util.List;
 
-public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Builder> implements BaseQuickAdapter.OnItemClickListener {
+public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Builder> implements OnItemClickListener {
 
     private RecyclerView mRecy;
     private AppCompatTextView btnConfirm;
@@ -133,7 +134,7 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
         private List data;//列表数据
         public int adapterlayoutResId;//自定义adapter 布局id
         private OnConvertItemListener mOnConvertItemListener;//自定义adapter 布局设置监听
-        private OnItemClickListener onItemClickListener;//item点击监听
+        private OnDialogItemClickListener onItemClickListener;//item点击监听
 
         public Builder(Context context) {
             super(context);
@@ -235,7 +236,7 @@ public class BottomSheetDialog extends MyBaseDialogFragment<BottomSheetDialog.Bu
          * @param onItemClickListener
          * @return
          */
-        public <T> Builder setOnItemClick(OnItemClickListener<T> onItemClickListener) {
+        public <T> Builder setOnItemClick(OnDialogItemClickListener<T> onItemClickListener) {
             this.onItemClickListener = onItemClickListener;
             return this;
         }

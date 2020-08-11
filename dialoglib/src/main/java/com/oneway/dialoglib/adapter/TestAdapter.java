@@ -7,14 +7,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.google.android.material.tabs.TabLayout;
 import com.oneway.dialoglib.R;
 import com.oneway.dialoglib.dialog.AddressDialog;
 
 import java.util.List;
 
-public class TestAdapter extends BaseQuickAdapter<List<AddressDialog.AddressBean>, BaseViewHolder> implements BaseQuickAdapter.OnItemClickListener {
+public class TestAdapter extends BaseQuickAdapter<List<AddressDialog.AddressBean>, BaseViewHolder> implements OnItemClickListener {
 
     private ViewPager2 mViewPager;
     private AddressListAdapter mAdapter;
@@ -34,7 +35,7 @@ public class TestAdapter extends BaseQuickAdapter<List<AddressDialog.AddressBean
     protected void convert(BaseViewHolder helper, List<AddressDialog.AddressBean> item) {
         int parentPosition = helper.getAdapterPosition();
         RecyclerView recy = helper.getView(R.id.recy);
-        recy.setLayoutManager(new LinearLayoutManager(mContext));
+        recy.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new AddressListAdapter();
         recy.setAdapter(mAdapter);
         mAdapter.setNewData(item);

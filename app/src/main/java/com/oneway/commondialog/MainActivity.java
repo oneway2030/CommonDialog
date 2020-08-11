@@ -17,7 +17,7 @@ import com.oneway.dialoglib.dialog.MeesageDialog;
 import com.oneway.dialoglib.dialog.SelectDialog;
 import com.oneway.dialoglib.in.DialogTextFormatter;
 import com.oneway.dialoglib.in.OnConvertItemListener;
-import com.oneway.dialoglib.in.OnItemClickListener;
+import com.oneway.dialoglib.in.OnDialogItemClickListener;
 import com.oneway.dialoglib.in.OnSelectedListener;
 import com.oneway.dialoglib.in.TitleViewCallback;
 
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 .itemTextColor(R.color.black95)
                 .setList(list)
                 .setItemTextFormatter((DialogTextFormatter<User>) item -> item.getName())
-                .setOnItemClick((OnItemClickListener<User>) (dialog, data, position) -> {
+                .setOnItemClick((OnDialogItemClickListener<User>) (dialog, data, position) -> {
                     defPosition = position;
                     showToast("点击的是 =>" + data.getAge() + "岁");
                     dialog.dismiss();
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 })
                 //设置数据
                 .setList(list)
-                .setOnItemClick(new OnItemClickListener<User>() {
+                .setOnItemClick(new OnDialogItemClickListener<User>() {
                     @Override
                     public void onItemClick(IDialog dialog, User data, int position) {
                         defPosition = position;
